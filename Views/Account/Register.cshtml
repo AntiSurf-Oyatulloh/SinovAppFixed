@@ -1,0 +1,47 @@
+@model SinovApp.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/register.css" />
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <form class="form" asp-action="Register" method="post">
+        <p class="title">Register</p>
+        <p class="message">Signup now and get full access to our app.</p>
+
+        <div class="flex">
+            <label>
+                <input asp-for="FirstName" class="input" type="text" required />
+                <span>Firstname</span>
+            </label>
+
+            <label>
+                <input asp-for="LastName" class="input" type="text" required />
+                <span>Lastname</span>
+            </label>
+        </div>
+
+        <label>
+            <input asp-for="Email" class="input" type="email" required />
+            <span>Email</span>
+        </label>
+
+        <label>
+            <input asp-for="Password" class="input" type="password" required />
+            <span>Password</span>
+        </label>
+
+        <label>
+            <input asp-for="ConfirmPassword" class="input" type="password" required />
+            <span>Confirm Password</span>
+        </label>
+
+        <button class="submit">Submit</button>
+        <p class="signin">
+            Already have an account?
+            <a asp-controller="Account" asp-action="Login">Signin</a>
+        </p>
+    </form>
+</div>

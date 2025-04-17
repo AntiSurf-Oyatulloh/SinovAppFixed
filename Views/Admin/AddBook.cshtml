@@ -1,0 +1,23 @@
+@model SinovApp.Controllers.Book
+
+<h2>Yangi Kitob Qo'shish</h2>
+
+<form method="post">
+    <div>
+        <label for="Title">Title:</label>
+        <input type="text" id="Title" name="Title" value="@Model.Title" required />
+    </div>
+    <div>
+        <label for="Author">Author:</label>
+        <input type="text" id="Author" name="Author" value="@Model.Author" required />
+    </div>
+    <div>
+        <label for="Category">Category:</label>
+        <input type="text" id="Category" name="Category" value="@Model.Category" required />
+    </div>
+    <div>
+        <label for="PdfLink">PDF Link:</label>
+        <input type="text" id="PdfLink" name="PdfLink" value="@Model.PdfLink" required />
+    </div>
+    <button type="submit">Qo'shish</button>
+</form>

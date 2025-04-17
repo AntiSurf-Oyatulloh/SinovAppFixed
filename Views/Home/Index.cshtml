@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Bosh sahifa";
+}
+
+<div class="text-center">
+    <h1>Welcome to SinovApp!</h1>
+    <p>Saytga xush kelibsiz. Google orqali tizimga kirish uchun tugmani bosing.</p>
+    <a href="/Account/GoogleLogin" class="btn btn-primary">Google orqali kirish</a>
+</div>
+
+<!-- Qidirish formasi -->
+<div class="search-container text-center mt-4">
+    <form method="get" action="/Home/Search">
+        <input type="text" name="query" placeholder="Kitobni qidirish..." class="form-control" style="width: 300px; display: inline-block;" />
+        <button type="submit" class="btn btn-primary">Qidirish</button>
+    </form>
+</div>
+
+<!-- Kitoblar bo'limlari -->
+<div class="container mt-5">
+    <h2>Kitoblar bo'limlari</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Romanlar</h3>
+            <p>Eng so'nggi romanlar va klassik asarlar.</p>
+            <a href="/Books/Romans" class="btn btn-secondary">Ko'rish</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Ilmiy adabiyotlar</h3>
+            <p>Ilmiy tadqiqotlar va akademik kitoblar.</p>
+            <a href="/Books/Science" class="btn btn-secondary">Ko'rish</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Darsliklar</h3>
+            <p>O'qish uchun darsliklar va o'quv materiallari.</p>
+            <a href="/Books/Textbooks" class="btn btn-secondary">Ko'rish</a>
+        </div>
+    </div>
+</div>
+
+<!-- Real vaqtni ko'rsatuvchi oyna -->
+<div class="text-center mt-5">
+    <h3>Joriy vaqt:</h3>
+    <div id="clock" class="text-center"></div>
+</div>
+
+<script>
+    function updateClock() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();  // Initial call
+</script>
