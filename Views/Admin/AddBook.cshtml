@@ -1,23 +1,54 @@
-@model SinovApp.Controllers.Book
+@model SinovApp.Models.Book
 
-<h2>Yangi Kitob Qo'shish</h2>
+@{
+    ViewData["Title"] = "Yangi Kitob Qo‘shish";
+}
 
-<form method="post">
-    <div>
-        <label for="Title">Title:</label>
-        <input type="text" id="Title" name="Title" value="@Model.Title" required />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 mx-auto" style="max-width: 600px;">
+        <h2 class="mb-4 text-center text-primary">📘 Yangi Kitob Qo‘shish</h2>
+
+        <form asp-action="AddBook" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control" placeholder="Kitob nomi" />
+                <label asp-for="Title">📖 Nomi</label>
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Author" class="form-control" placeholder="Muallif" />
+                <label asp-for="Author">✍️ Muallif</label>
+                <span asp-validation-for="Author" class="text-danger small"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Category" class="form-control" placeholder="Turkum" />
+                <label asp-for="Category">📂 Turkum (Romanlar, Ilmiy adabiyotlar, Darsliklar)</label>
+                <span asp-validation-for="Category" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UploadedFile" class="form-label">📁 Fayl yuklang (PDF)</label>
+                <input asp-for="UploadedFile" class="form-control" type="file" accept=".pdf" />
+                <span asp-validation-for="UploadedFile" class="text-danger small"></span>
+            </div>
+
+            <div class="form-floating mb-4">
+                <input asp-for="PdfLink" class="form-control" placeholder="PDF havolasi" />
+                <label asp-for="PdfLink">🌐 Tashqi PDF havola (ixtiyoriy)</label>
+                <span asp-validation-for="PdfLink" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 mb-2">➕ Qo‘shish</button>
+            <a href="/Admin" class="btn btn-outline-secondary w-100">⬅️ Orqaga</a>
+        </form>
     </div>
-    <div>
-        <label for="Author">Author:</label>
-        <input type="text" id="Author" name="Author" value="@Model.Author" required />
-    </div>
-    <div>
-        <label for="Category">Category:</label>
-        <input type="text" id="Category" name="Category" value="@Model.Category" required />
-    </div>
-    <div>
-        <label for="PdfLink">PDF Link:</label>
-        <input type="text" id="PdfLink" name="PdfLink" value="@Model.PdfLink" required />
-    </div>
-    <button type="submit">Qo'shish</button>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

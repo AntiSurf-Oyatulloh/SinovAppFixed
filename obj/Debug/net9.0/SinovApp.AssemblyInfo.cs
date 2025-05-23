@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SinovApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a50ecc0ff77d0a1d2570744cc5502f070c144a13")]
 [assembly: System.Reflection.AssemblyProductAttribute("SinovApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SinovApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

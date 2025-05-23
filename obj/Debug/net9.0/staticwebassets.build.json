@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YuolNXeLayQ+e5vJ3UM73LOy9K/566/ScwAOeURiK1g=",
+  "Hash": "13xJW7JrJxZpXWEt+I1q2Cm2c3QUAtXHGwCIJ8N4JAU=",
   "Source": "SinovApp",
   "BasePath": "_content/SinovApp",
   "Mode": "Default",
@@ -1445,6 +1445,48 @@
       "OriginalItemSpec": "/Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/scopedcss/projectbundle/SinovApp.bundle.scp.css"
     },
     {
+      "Identity": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/DINSHUNOSLIK.pdf",
+      "SourceId": "SinovApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/",
+      "BasePath": "_content/SinovApp",
+      "RelativePath": "books/DINSHUNOSLIK#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "pzhdg334x9",
+      "Integrity": "VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/books/DINSHUNOSLIK.pdf"
+    },
+    {
+      "Identity": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/Tarix_falsafasi.pdf",
+      "SourceId": "SinovApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/",
+      "BasePath": "_content/SinovApp",
+      "RelativePath": "books/Tarix_falsafasi#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "dsh2a2boj0",
+      "Integrity": "jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/books/Tarix_falsafasi.pdf"
+    },
+    {
       "Identity": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/css/register.css",
       "SourceId": "SinovApp",
       "SourceType": "Discovered",
@@ -2833,6 +2875,170 @@
   ],
   "Endpoints": [
     {
+      "Route": "books/DINSHUNOSLIK.pdf",
+      "AssetFile": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/DINSHUNOSLIK.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77562"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 10:16:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k="
+        }
+      ]
+    },
+    {
+      "Route": "books/DINSHUNOSLIK.pzhdg334x9.pdf",
+      "AssetFile": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/DINSHUNOSLIK.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77562"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 10:16:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pzhdg334x9"
+        },
+        {
+          "Name": "label",
+          "Value": "books/DINSHUNOSLIK.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k="
+        }
+      ]
+    },
+    {
+      "Route": "books/Tarix_falsafasi.dsh2a2boj0.pdf",
+      "AssetFile": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/Tarix_falsafasi.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "48712"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 09:52:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dsh2a2boj0"
+        },
+        {
+          "Name": "label",
+          "Value": "books/Tarix_falsafasi.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw="
+        }
+      ]
+    },
+    {
+      "Route": "books/Tarix_falsafasi.pdf",
+      "AssetFile": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/Tarix_falsafasi.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "48712"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 09:52:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw="
+        }
+      ]
+    },
+    {
       "Route": "css/register.css",
       "AssetFile": "/Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/compressed/v05irhxhbe-ff7ajjh748.gz",
       "Selectors": [
@@ -2857,7 +3063,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2910,7 +3116,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2947,7 +3153,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2994,7 +3200,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3055,7 +3261,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3100,7 +3306,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22093,7 +22299,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22146,7 +22352,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22183,7 +22389,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22230,7 +22436,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22291,7 +22497,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22336,7 +22542,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22391,7 +22597,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22452,7 +22658,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22497,7 +22703,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22552,7 +22758,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22605,7 +22811,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22642,7 +22848,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Cache-Control",

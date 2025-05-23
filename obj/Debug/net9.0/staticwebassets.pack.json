@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/SinovApp.ooyrnjc1up.bundle.scp.css"
     },
     {
+      "Id": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/DINSHUNOSLIK.pdf",
+      "PackagePath": "staticwebassets/books/DINSHUNOSLIK.pdf"
+    },
+    {
+      "Id": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/books/Tarix_falsafasi.pdf",
+      "PackagePath": "staticwebassets/books/Tarix_falsafasi.pdf"
+    },
+    {
       "Id": "/Users/icomp/Desktop/Sinov/SinovApp/wwwroot/css/register.css",
       "PackagePath": "staticwebassets/css/register.css"
     },

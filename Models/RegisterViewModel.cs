@@ -14,19 +14,16 @@ namespace SinovApp.Models
 
         [Required(ErrorMessage = "Email manzilini kiriting")]
         [EmailAddress(ErrorMessage = "To‘g‘ri email manzil kiriting")]
-        [Display(Name = "Email")]
         public string Email { get; set; } = "";
 
         [Required(ErrorMessage = "Parolni kiriting")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Parol")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Parol kamida 6 ta belgidan iborat bo‘lishi kerak")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = "";
 
         [Required(ErrorMessage = "Parolni tasdiqlang")]
+        [Compare("Password", ErrorMessage = "Parollar mos emas")]
         [DataType(DataType.Password)]
-        [Display(Name = "Parolni tasdiqlash")]
-        [Compare("Password", ErrorMessage = "Parollar mos kelmayapti")]
         public string ConfirmPassword { get; set; } = "";
     }
 }

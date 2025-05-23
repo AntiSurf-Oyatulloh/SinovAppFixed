@@ -43,7 +43,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Vary",
@@ -92,7 +92,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         }
       ],
       "EndpointProperties": [
@@ -141,7 +141,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Vary",
@@ -204,7 +204,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Vary",
@@ -245,7 +245,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         }
       ],
       "EndpointProperties": [
@@ -286,7 +286,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 17 Apr 2025 10:22:28 GMT"
+          "Value": "Thu, 22 May 2025 06:33:57 GMT"
         },
         {
           "Name": "Vary",
@@ -297,6 +297,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-dkx8N0zIdmlAlLfk2PbzP1LjQtyhz98PuFImkJo9gs0="
+        }
+      ]
+    },
+    {
+      "Route": "books/DINSHUNOSLIK.pdf",
+      "AssetFile": "books/DINSHUNOSLIK.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77562"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 10:16:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k="
+        }
+      ]
+    },
+    {
+      "Route": "books/DINSHUNOSLIK.pzhdg334x9.pdf",
+      "AssetFile": "books/DINSHUNOSLIK.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77562"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 10:16:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pzhdg334x9"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VcjOye0tuf8Gqe8CtiOsw8cIJwTF8I4iA4PXJyKox3k="
+        },
+        {
+          "Name": "label",
+          "Value": "books/DINSHUNOSLIK.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "books/Tarix_falsafasi.dsh2a2boj0.pdf",
+      "AssetFile": "books/Tarix_falsafasi.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "48712"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 09:52:15 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dsh2a2boj0"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw="
+        },
+        {
+          "Name": "label",
+          "Value": "books/Tarix_falsafasi.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "books/Tarix_falsafasi.pdf",
+      "AssetFile": "books/Tarix_falsafasi.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "48712"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 09:52:15 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jQj23QqOF6pmXvhIjj1xeuQAin2GEMunDkQa7MEaAgw="
         }
       ]
     },
@@ -341,7 +505,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Vary",
@@ -382,7 +546,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         }
       ],
       "EndpointProperties": [
@@ -423,7 +587,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Vary",
@@ -478,7 +642,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Vary",
@@ -527,7 +691,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         }
       ],
       "EndpointProperties": [
@@ -576,7 +740,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 02:15:15 GMT"
+          "Value": "Thu, 22 May 2025 10:24:43 GMT"
         },
         {
           "Name": "Vary",

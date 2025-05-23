@@ -1,14 +1,16 @@
-﻿@{
+﻿@model List<SinovApp.Models.Book>
+
+@{
     ViewData["Title"] = "Bosh sahifa";
 }
 
 <div class="text-center">
-    <h1>Welcome to SinovApp!</h1>
+    <h1>xush kelibsiz  SinovApp!</h1>
     <p>Saytga xush kelibsiz. Google orqali tizimga kirish uchun tugmani bosing.</p>
     <a href="/Account/GoogleLogin" class="btn btn-primary">Google orqali kirish</a>
 </div>
 
-<!-- Qidirish formasi -->
+<!-- 🔍 Qidiruv formasi -->
 <div class="search-container text-center mt-4">
     <form method="get" action="/Home/Search">
         <input type="text" name="query" placeholder="Kitobni qidirish..." class="form-control" style="width: 300px; display: inline-block;" />
@@ -16,43 +18,67 @@
     </form>
 </div>
 
-<!-- Kitoblar bo'limlari -->
+<!-- 📚 Kitoblar ro'yxati -->
 <div class="container mt-5">
-    <h2>Kitoblar bo'limlari</h2>
+    <h2 class="mb-4">📚 Mavjud kitoblar</h2>
+    @if (Model != null && Model.Count > 0)
+    {
+        @foreach (var book in Model)
+        {
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@book.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Muallif: @book.Author</h6>
+                    <p class="card-text">Kategoriya: <strong>@book.Category</strong></p>
+                    <a asp-controller="Books" asp-action="Download" asp-route-fileName="@System.IO.Path.GetFileName(book.PdfLink)" class="btn btn-outline-success">
+                        ⬇️ Yuklab olish
+                    </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">Hech qanday kitob topilmadi.</div>
+    }
+</div>
+
+<!-- 🗂️ Kitob bo‘limlari -->
+<div class="container mt-5">
+    <h2>Kitoblar bo‘limlari</h2>
     <div class="row">
         <div class="col-md-4">
             <h3>Romanlar</h3>
             <p>Eng so'nggi romanlar va klassik asarlar.</p>
-            <a href="/Books/Romans" class="btn btn-secondary">Ko'rish</a>
+            <a href="/Books/Romans" class="btn btn-secondary">Ko‘rish</a>
         </div>
         <div class="col-md-4">
             <h3>Ilmiy adabiyotlar</h3>
             <p>Ilmiy tadqiqotlar va akademik kitoblar.</p>
-            <a href="/Books/Science" class="btn btn-secondary">Ko'rish</a>
+            <a href="/Books/Science" class="btn btn-secondary">Ko‘rish</a>
         </div>
         <div class="col-md-4">
             <h3>Darsliklar</h3>
-            <p>O'qish uchun darsliklar va o'quv materiallari.</p>
-            <a href="/Books/Textbooks" class="btn btn-secondary">Ko'rish</a>
+            <p>O‘qish uchun darsliklar va o‘quv materiallari.</p>
+            <a href="/Books/Textbooks" class="btn btn-secondary">Ko‘rish</a>
         </div>
     </div>
 </div>
 
-<!-- Real vaqtni ko'rsatuvchi oyna -->
+<!-- ⏰ Real vaqt -->
 <div class="text-center mt-5">
     <h3>Joriy vaqt:</h3>
-    <div id="clock" class="text-center"></div>
+    <div id="clock" class="fs-4 fw-bold text-success"></div>
 </div>
 
 <script>
     function updateClock() {
-        var now = new Date();
-        var hours = now.getHours().toString().padStart(2, '0');
-        var minutes = now.getMinutes().toString().padStart(2, '0');
-        var seconds = now.getSeconds().toString().padStart(2, '0');
-        document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+        const now = new Date();
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = now.getMinutes().toString().padStart(2, '0');
+        const s = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').innerText = `${h}:${m}:${s}`;
     }
-
     setInterval(updateClock, 1000);
-    updateClock();  // Initial call
+    updateClock();
 </script>

@@ -48,8 +48,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQWRtaW5QYW5lbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/icomp/Desktop/Sinov/SinovApp/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/icomp/Desktop/Sinov/SinovApp/Views/Admin/Statistics.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vU3RhdGlzdGljcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/icomp/Desktop/Sinov/SinovApp/Views/Books/Romans.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvUm9tYW5zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/icomp/Desktop/Sinov/SinovApp/Views/Books/Science.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvU2NpZW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/icomp/Desktop/Sinov/SinovApp/Views/Books/Textbooks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQm9va3MvVGV4dGJvb2tzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/icomp/Desktop/Sinov/SinovApp/Views/Home/Index.cshtml]

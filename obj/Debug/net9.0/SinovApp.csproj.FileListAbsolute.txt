@@ -309,6 +309,7 @@
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/SinovApp.MvcApplicationPartsAssemblyInfo.cache
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/SinovApp.RazorAssemblyInfo.cache
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/SinovApp.RazorAssemblyInfo.cs
+/Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/SinovApp.sourcelink.json
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/scopedcss/bundle/SinovApp.styles.css
 /Users/icomp/Desktop/Sinov/SinovApp/obj/Debug/net9.0/scopedcss/projectbundle/SinovApp.bundle.scp.css
