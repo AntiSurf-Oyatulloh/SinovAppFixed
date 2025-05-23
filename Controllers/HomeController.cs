@@ -43,33 +43,6 @@ namespace SinovApp.Controllers
             return View("Index", filteredBooks);
         }
 
-        // 📘 Romanlar bo'limi
-        public async Task<IActionResult> Romans()
-        {
-            var romanBooks = await _context.Books
-                .Where(b => b.Category == "Romanlar")
-                .ToListAsync();
-            return View(romanBooks);
-        }
-
-        // 📗 Ilmiy adabiyotlar bo'limi
-        public async Task<IActionResult> Science()
-        {
-            var scienceBooks = await _context.Books
-                .Where(b => b.Category == "Ilmiy adabiyotlar")
-                .ToListAsync();
-            return View(scienceBooks);
-        }
-
-        // 📕 Darsliklar bo'limi
-        public async Task<IActionResult> Textbooks()
-        {
-            var textbooks = await _context.Books
-                .Where(b => b.Category == "Darsliklar")
-                .ToListAsync();
-            return View(textbooks);
-        }
-
         // ⬇️ PDF yuklab olish
         public IActionResult Download(string fileName)
         {

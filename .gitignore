@@ -17,6 +17,7 @@ obj/
 appsettings.json
 appsettings.*.json
 !appsettings.Example.json
+.env
 
 # Build results
 [Dd]ebug/
@@ -33,3 +34,7 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
+# Sensitive files
+**/bin/Debug/net9.0/appsettings.json
+**/bin/Release/net9.0/appsettings.json

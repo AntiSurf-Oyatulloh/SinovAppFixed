@@ -30,9 +30,16 @@
                     <h5 class="card-title text-primary">@book.Title</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Muallif: @book.Author</h6>
                     <p class="card-text">Kategoriya: <strong>@book.Category</strong></p>
-                    <a asp-controller="Books" asp-action="Download" asp-route-fileName="@System.IO.Path.GetFileName(book.PdfLink)" class="btn btn-outline-success">
-                        ⬇️ Yuklab olish
-                    </a>
+                    @if (!string.IsNullOrEmpty(book.FilePath))
+                    {
+                        <a href="@book.FilePath" class="btn btn-primary btn-sm" target="_blank">
+                            <i class="fas fa-book-open"></i> O'qish
+                        </a>
+                        <a href="@Url.Action("Download", "Books", new { fileName = System.IO.Path.GetFileName(book.FilePath) })" 
+                           class="btn btn-success btn-sm">
+                            <i class="fas fa-download"></i> Yuklash
+                        </a>
+                    }
                 </div>
             </div>
         }
@@ -43,24 +50,24 @@
     }
 </div>
 
-<!-- 🗂️ Kitob bo‘limlari -->
+<!-- 🗂️ Kitob bo'limlari -->
 <div class="container mt-5">
-    <h2>Kitoblar bo‘limlari</h2>
+    <h2>Kitoblar bo'limlari</h2>
     <div class="row">
         <div class="col-md-4">
             <h3>Romanlar</h3>
             <p>Eng so'nggi romanlar va klassik asarlar.</p>
-            <a href="/Books/Romans" class="btn btn-secondary">Ko‘rish</a>
+            <a href="/Books/Romans" class="btn btn-secondary">Ko'rish</a>
         </div>
         <div class="col-md-4">
             <h3>Ilmiy adabiyotlar</h3>
             <p>Ilmiy tadqiqotlar va akademik kitoblar.</p>
-            <a href="/Books/Science" class="btn btn-secondary">Ko‘rish</a>
+            <a href="/Books/Science" class="btn btn-secondary">Ko'rish</a>
         </div>
         <div class="col-md-4">
             <h3>Darsliklar</h3>
-            <p>O‘qish uchun darsliklar va o‘quv materiallari.</p>
-            <a href="/Books/Textbooks" class="btn btn-secondary">Ko‘rish</a>
+            <p>O'qish uchun darsliklar va o'quv materiallari.</p>
+            <a href="/Books/Textbooks" class="btn btn-secondary">Ko'rish</a>
         </div>
     </div>
 </div>
