@@ -113,73 +113,73 @@ namespace SinovApp.Controllers
 
             try
             {
-                var info = await _signInManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    Console.WriteLine("❌ info NULL. GoogleLogin info kelmadi.");
-                    TempData["Error"] = "Google ma'lumotlarini olishda xatolik yuz berdi.";
-                    return RedirectToAction("Login");
-                }
-
-                Console.WriteLine("✅ info keldi");
-                Console.WriteLine($"👤 Email: {info.Principal.FindFirstValue(ClaimTypes.Email)}");
-                Console.WriteLine($"🔑 Login Provider: {info.LoginProvider}");
-
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                if (string.IsNullOrEmpty(email))
-                {
-                    Console.WriteLine("⚠️ Email yo'q");
-                    TempData["Error"] = "Email ma'lumoti topilmadi.";
-                    return RedirectToAction("Login");
-                }
-
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user != null)
-                {
-                    Console.WriteLine("👤 Foydalanuvchi bazada bor");
-                    var logins = await _userManager.GetLoginsAsync(user);
-                    if (!logins.Any(l => l.LoginProvider == info.LoginProvider))
-                    {
-                        Console.WriteLine("🔗 Login provider bog'lanmagan, endi bog'layapmiz");
-                        await _userManager.AddLoginAsync(user, info);
-                    }
-
-                    await _signInManager.SignInAsync(user, false);
-                    var role = await _userManager.IsInRoleAsync(user, "Admin") ? "Admin" : "User";
-                    Console.WriteLine($"🔄 Roli: {role}");
-
-                    return RedirectToAction("Index", role);
-                }
-
-                Console.WriteLine("🆕 Yangi user yaratilyapti");
-                var newUser = new ApplicationUser
-                {
-                    UserName = email,
-                    Email = email,
-                    FullName = info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? "Foydalanuvchi",
-                    EmailConfirmed = true
-                };
-
-                var createResult = await _userManager.CreateAsync(newUser);
-                if (createResult.Succeeded)
-                {
-                    await _userManager.AddLoginAsync(newUser, info);
-
-                    var role = email.ToLower() == "oyatullohmuxtorov5@gmail.com" ? "Admin" : "User";
-                    await _userManager.AddToRoleAsync(newUser, role);
-
-                    await _signInManager.SignInAsync(newUser, false);
-                    Console.WriteLine($"✅ Foydalanuvchi yaratildi va {role} rol berildi.");
-
-                    return RedirectToAction("Index", role);
-                }
-
-                Console.WriteLine("❌ Foydalanuvchi yaratishda xato:");
-                foreach (var error in createResult.Errors)
-                    Console.WriteLine($"⚠️ {error.Description}");
-
-                TempData["Error"] = "Yangi foydalanuvchini yaratishda xatolik yuz berdi.";
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                Console.WriteLine("❌ info NULL. GoogleLogin info kelmadi.");
+                TempData["Error"] = "Google ma'lumotlarini olishda xatolik yuz berdi.";
                 return RedirectToAction("Login");
+            }
+
+            Console.WriteLine("✅ info keldi");
+            Console.WriteLine($"👤 Email: {info.Principal.FindFirstValue(ClaimTypes.Email)}");
+            Console.WriteLine($"🔑 Login Provider: {info.LoginProvider}");
+
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email))
+            {
+                Console.WriteLine("⚠️ Email yo'q");
+                TempData["Error"] = "Email ma'lumoti topilmadi.";
+                return RedirectToAction("Login");
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                Console.WriteLine("👤 Foydalanuvchi bazada bor");
+                var logins = await _userManager.GetLoginsAsync(user);
+                if (!logins.Any(l => l.LoginProvider == info.LoginProvider))
+                {
+                        Console.WriteLine("🔗 Login provider bog'lanmagan, endi bog'layapmiz");
+                    await _userManager.AddLoginAsync(user, info);
+                }
+
+                await _signInManager.SignInAsync(user, false);
+                var role = await _userManager.IsInRoleAsync(user, "Admin") ? "Admin" : "User";
+                Console.WriteLine($"🔄 Roli: {role}");
+
+                return RedirectToAction("Index", role);
+            }
+
+            Console.WriteLine("🆕 Yangi user yaratilyapti");
+            var newUser = new ApplicationUser
+            {
+                UserName = email,
+                Email = email,
+                FullName = info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? "Foydalanuvchi",
+                EmailConfirmed = true
+            };
+
+            var createResult = await _userManager.CreateAsync(newUser);
+            if (createResult.Succeeded)
+            {
+                await _userManager.AddLoginAsync(newUser, info);
+
+                var role = email.ToLower() == "oyatullohmuxtorov5@gmail.com" ? "Admin" : "User";
+                await _userManager.AddToRoleAsync(newUser, role);
+
+                await _signInManager.SignInAsync(newUser, false);
+                Console.WriteLine($"✅ Foydalanuvchi yaratildi va {role} rol berildi.");
+
+                return RedirectToAction("Index", role);
+            }
+
+            Console.WriteLine("❌ Foydalanuvchi yaratishda xato:");
+            foreach (var error in createResult.Errors)
+                Console.WriteLine($"⚠️ {error.Description}");
+
+            TempData["Error"] = "Yangi foydalanuvchini yaratishda xatolik yuz berdi.";
+            return RedirectToAction("Login");
             }
             catch (Exception ex)
             {
