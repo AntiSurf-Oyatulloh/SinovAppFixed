@@ -1,0 +1,50 @@
+@model SinovApp.Models.SearchViewModel
+
+<form asp-controller="Books" asp-action="Search" method="get" class="search-form">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input asp-for="SearchTerm" class="form-control" placeholder="Qidiruv..." />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <select asp-for="Category" class="form-select">
+                    <option value="">Barcha kategoriyalar</option>
+                    <option value="Romanlar">Romanlar</option>
+                    <option value="Ilmiy adabiyotlar">Ilmiy adabiyotlar</option>
+                    <option value="Darsliklar">Darsliklar</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <select asp-for="SortBy" class="form-select">
+                    <option value="newest">Yangi kitoblar</option>
+                    <option value="popular">Mashhur kitoblar</option>
+                    <option value="downloads">Ko'p yuklanganlar</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search"></i> Qidirish
+            </button>
+        </div>
+    </div>
+</form>
+
+<div id="searchResults" class="search-results">
+    <!-- Search results will be loaded here -->
+</div>
+
+<div id="loadingSpinner" class="text-center d-none">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Yuklanmoqda...</span>
+    </div>
+</div>
+
+<div id="noResults" class="alert alert-info d-none">
+    <i class="bi bi-info-circle me-2"></i>
+    Hech qanday natija topilmadi
+</div> 

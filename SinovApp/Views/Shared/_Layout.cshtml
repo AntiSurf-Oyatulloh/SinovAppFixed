@@ -1,0 +1,299 @@
+﻿@inject IConfiguration Configuration
+@inject ILogger<object> _logger
+
+<!DOCTYPE html>
+<html lang="uz" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SinovApp</title>
+    @* Bootstrap asosiy CSS CDN orqali *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    @* Lokal Bootstrap CSS (agar CDN ishlamasa yoki oflayn bo'lsa) *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="~/images/logo.png" alt="Logo" width="32" height="32" class="me-2" />
+                    <span>SinovApp</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Bosh sahifa</a>
+                        </li>
+
+                        @* Kitob bo'limlari dropdown - barcha foydalanuvchilar uchun *@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-book me-1"></i>Kitoblar
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Romans">
+                                        <i class="bi bi-book me-2"></i>Romanlar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Science">
+                                        <i class="bi bi-journal-text me-2"></i>Ilmiy adabiyotlar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Books" asp-action="Textbooks">
+                                        <i class="bi bi-journal me-2"></i>Darsliklar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            @* Log: Foydalanuvchi autentifikatsiya qilinganini tekshirish *@
+                            var isAuthenticated = User.Identity.IsAuthenticated;
+                            var userName = User.Identity.Name;
+                            var isAdmin = User.IsInRole("Admin");
+                            _logger.LogInformation($"User authenticated: {isAuthenticated}, User Name: {userName}, Is Admin: {isAdmin}");
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i>@User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item text-primary" href="/Admin/Index">
+                                                <i class="bi bi-gear me-2"></i>Admin Panel
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    }
+                                    <li>
+                                        <a class="dropdown-item" href="/Profile">
+                                            <i class="bi bi-person me-2"></i>Profil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/Profile/MyBooks">
+                                            <i class="bi bi-bookmark me-2"></i>Mening kitoblarim
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="/Account/Logout">
+                                            <i class="bi bi-box-arrow-right me-2"></i>Chiqish
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Account/Login">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>Kirish
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/Register">
+                                <i class="bi bi-person-plus me-1"></i>Ro'yxatdan o'tish
+                            </a>
+                        </li>
+
+                        <li class="nav-item d-flex align-items-center ms-lg-2">
+                            <div class="form-check form-switch form-check-reverse">
+                                <input class="form-check-input" type="checkbox" id="themeSwitch">
+                                <label class="form-check-label text-white" for="themeSwitch" id="themeSwitchLabel"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-4">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="bg-light py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">SinovApp</h5>
+                    <p class="text-muted">Zamonaviy kutubxona boshqaruv tizimi</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="mb-3">Sahifalar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-decoration-none">Bosh sahifa</a></li>
+                        <li><a href="/Books/Romans" class="text-decoration-none">Romanlar</a></li>
+                        <li><a href="/Books/Science" class="text-decoration-none">Ilmiy adabiyotlar</a></li>
+                        <li><a href="/Books/Textbooks" class="text-decoration-none">Darsliklar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="mb-3">Ijtimoiy tarmoqlar</h5>
+                    <div class="d-flex gap-3">
+                        <a href="https://x.com/elonmusk" class="text-decoration-none"><i class="bi bi-twitter-x fs-5"></i></a>
+                        <a href="@Configuration["SocialMediaLinks:Telegram"]" class="text-decoration-none"><i class="bi bi-telegram fs-5"></i></a>
+                        <a href="@Configuration["SocialMediaLinks:Instagram"]" class="text-decoration-none"><i class="bi bi-instagram fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center text-muted">
+                <small>© 2025 SinovApp. Barcha huquqlar himoyalangan.</small>
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    @* Bootstrap asosiy JS CDN orqali endi eng pastga joylashtirildi *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @* Lokal Bootstrap JS (agar CDN ishlamasa yoki oflayn bo'lsa) - HOZIRCHA KOMMENTARIYA QILINDI *@
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">Kitobni ko'rish</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="bookPreviewIframe" style="width: 100%; height: 80vh;"></iframe>
+                    <div id="previewError" class="alert alert-danger d-none">Faylni yuklashda xatolik yuz berdi yoki ko'rish uchun mos formatda emas.</div>
+                    <div id="previewLoading" class="text-center">
+                         <div class="spinner-border text-primary" role="status">
+                             <span class="visually-hidden">Yuklanmoqda...</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme switch functionality
+            const themeSwitch = document.getElementById('themeSwitch');
+            const themeLabel = document.getElementById('themeSwitchLabel');
+            if (themeSwitch && themeLabel) {
+                themeSwitch.addEventListener('change', function() {
+                    document.documentElement.setAttribute('data-bs-theme', this.checked ? 'dark' : 'light');
+                    themeLabel.textContent = this.checked ? 'Dark' : 'Light';
+                });
+
+                // Set initial theme based on system preference or stored value
+                const currentTheme = localStorage.getItem('theme');
+                if (currentTheme === 'dark') {
+                     document.documentElement.setAttribute('data-bs-theme', 'dark');
+                     themeSwitch.checked = true;
+                     themeLabel.textContent = 'Dark';
+                } else {
+                     document.documentElement.setAttribute('data-bs-theme', 'light');
+                     themeSwitch.checked = false;
+                     themeLabel.textContent = 'Light';
+                }
+            }
+
+            // Preview Modal Functionality
+            const previewModal = document.getElementById('previewModal');
+            const iframe = document.getElementById('bookPreviewIframe');
+            const loadingSpinner = document.getElementById('previewLoading');
+            const errorDiv = document.getElementById('previewError');
+
+            if (previewModal && iframe && loadingSpinner && errorDiv) {
+                previewModal.addEventListener('show.bs.modal', function (event) {
+                    // Button that triggered the modal
+                    const button = event.relatedTarget;
+                    // Extract info from data-bs-* attributes
+                    const bookId = button.getAttribute('data-id');
+
+                    // Reset previous state
+                    iframe.src = ''; // Clear previous content
+                    errorDiv.classList.add('d-none'); // Hide any previous error
+                    loadingSpinner.classList.remove('d-none'); // Show loading spinner
+
+                    // Fetch book content
+                    fetch(`/Books/Preview/${bookId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            // Check content type to determine if it's a URL or a file
+                            const contentType = response.headers.get('Content-Type');
+
+                            if (contentType && contentType.includes('text/plain')) {
+                                // It's likely a URL
+                                return response.text();
+                            } else {
+                                // It's likely a file (like PDF)
+                                return response.blob();
+                            }
+                        })
+                        .then(content => {
+                            loadingSpinner.classList.add('d-none'); // Hide spinner
+
+                            if (typeof content === 'string') {
+                                // It was a URL
+                                iframe.src = content;
+                            } else {
+                                // It was a Blob (file)
+                                const objectUrl = URL.createObjectURL(content);
+                                iframe.src = objectUrl;
+
+                                // Clean up the object URL when the modal is hidden
+                                previewModal.addEventListener('hidden.bs.modal', function () {
+                                    URL.revokeObjectURL(objectUrl);
+                                }, { once: true }); // Use { once: true } to automatically remove the listener after it's been called
+                            }
+
+                            iframe.classList.remove('d-none'); // Show iframe
+                        })
+                        .catch(error => {
+                            console.error('Error loading book preview:', error);
+                            loadingSpinner.classList.add('d-none'); // Hide spinner
+                            iframe.classList.add('d-none'); // Hide iframe
+                            errorDiv.classList.remove('d-none'); // Show error message
+                        });
+                });
+
+                // Hide spinner if iframe fails to load (e.g., external link not working)
+                iframe.addEventListener('error', function() {
+                    loadingSpinner.classList.add('d-none');
+                    iframe.classList.add('d-none');
+                    errorDiv.classList.remove('d-none');
+                });
+
+                 // Ensure spinner is hidden once content is loaded into iframe
+                 // This handles cases where src is set to an external URL or object URL
+                 iframe.addEventListener('load', function() {
+                    loadingSpinner.classList.add('d-none');
+                    iframe.classList.remove('d-none');
+                    errorDiv.classList.add('d-none'); // Hide error if it was previously shown
+                 });
+            }
+        });
+    </script>
+</body>
+</html>

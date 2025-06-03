@@ -1,0 +1,126 @@
+﻿@model List<SinovApp.Models.Book>
+
+@{
+    ViewData["Title"] = "Bosh sahifa";
+}
+
+<div class="text-center">
+    <h1>Xush kelibsiz SinovApp!</h1>
+    <p>Saytga xush kelibsiz. Google orqali tizimga kirish uchun tugmani bosing.</p>
+    <a href="/Account/GoogleLogin" class="btn btn-primary">Google orqali kirish</a>
+</div>
+
+<!-- 🔍 Qidiruv formasi -->
+<div class="search-container text-center mt-4">
+    <form method="get" action="/Home/Search">
+        <input type="text" name="query" placeholder="Kitobni qidirish..." class="form-control"
+            style="width: 300px; display: inline-block;" />
+        <button type="submit" class="btn btn-primary">Qidirish</button>
+    </form>
+</div>
+
+<!-- 📚 Kitoblar ro'yxati -->
+<div class="container mt-5">
+    <h2 class="mb-4">📚 Mavjud kitoblar</h2>
+    @if (Model != null && Model.Count > 0)
+    {
+        @if (Model.Count > 6)
+        {
+            @* Agar kitoblar soni 6 tadan ko'p bo'lsa, gorizontal aylanadigan ro'yxat ko'rsatiladi *@
+            <div class="position-relative">
+                <div class="books-carousel-container d-flex flex-nowrap overflow-auto">
+                    @foreach (var book in Model)
+                    {
+                        <div class="book-card-wrapper flex-shrink-0 me-3">
+                            @* _BookCard.cshtml partial view ishlatiladi *@
+                            <partial name="_BookCard" model="book" />
+                        </div>
+                    }
+                </div>
+
+                @* Karusel navigatsiya tugmalari (CSS bilan joylashtiriladi) *@
+                <button class="carousel-control-prev-manual" type="button" data-target="#books-carousel-container">
+                    <span class="carousel-control-prev-icon-manual" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next-manual" type="button" data-target="#books-carousel-container">
+                    <span class="carousel-control-next-icon-manual" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            @* Agar kitoblar soni 6 tadan kam yoki teng bo'lsa, oddiy grid ko'rsatiladi *@
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var book in Model)
+                {
+                    <div class="col">
+                        @* _BookCard.cshtml partial view ishlatiladi *@
+                        <partial name="_BookCard" model="book" />
+                    </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">Hech qanday kitob topilmadi.</div>
+    }
+</div>
+
+<!-- 🗂️ Kitob bo'limlari -->
+<div class="container mt-5">
+    <h2>Kitoblar bo'limlari</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-book fs-1 text-primary"></i>
+                    <h3 class="card-title">Romanlar</h3>
+                    <p class="card-text">Eng so'nggi romanlar va klassik asarlar.</p>
+                    <a href="/Books/Romans" class="btn btn-outline-primary mt-auto">Ko'rish</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-journal-text fs-1 text-success"></i>
+                    <h3 class="card-title">Ilmiy adabiyotlar</h3>
+                    <p class="card-text">Ilmiy tadqiqotlar va akademik kitoblar.</p>
+                    <a href="/Books/Science" class="btn btn-outline-success mt-auto">Ko'rish</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-journal fs-1 text-info"></i>
+                    <h3 class="card-title">Darsliklar</h3>
+                    <p class="card-text">O'qish uchun darsliklar va o'quv materiallari.</p>
+                    <a href="/Books/Textbooks" class="btn btn-outline-info mt-auto">Ko'rish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ⏰ Real vaqt -->
+<div class="text-center mt-5">
+    <h3>Joriy vaqt:</h3>
+    <div id="clock" class="fs-4 fw-bold text-success"></div>
+</div>
+
+<script>
+    function updateClock()
+    {
+        const now = new Date();
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = now.getMinutes().toString().padStart(2, '0');
+        const s = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').innerText = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>

@@ -1,0 +1,129 @@
+@model SinovApp.Models.Book
+
+@{
+    ViewData["Title"] = "Kitobni tahrirlash";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/edit-book.css" asp-append-version="true" />
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm edit-book-form">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Kitobni tahrirlash</h2>
+
+                    <form asp-action="EditBook" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Title" class="form-label"></label>
+                                    <input asp-for="Title" class="form-control" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Author" class="form-label"></label>
+                                    <input asp-for="Author" class="form-control" />
+                                    <span asp-validation-for="Author" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Category" class="form-label"></label>
+                                    <select asp-for="Category" class="form-select">
+                                        <option value="">Kategoriyani tanlang</option>
+                                        <option value="Romanlar">Romanlar</option>
+                                        <option value="Ilmiy adabiyotlar">Ilmiy adabiyotlar</option>
+                                        <option value="Darsliklar">Darsliklar</option>
+                                    </select>
+                                    <span asp-validation-for="Category" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="UploadedFile" class="form-label"></label>
+                                    <input asp-for="UploadedFile" class="form-control" type="file" accept=".pdf" />
+                                    <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                                    @if (!string.IsNullOrEmpty(Model.FilePath))
+                                    {
+                                        <small class="form-text text-muted">
+                                            Joriy fayl: @Model.RealFileName
+                                        </small>
+                                    }
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="UploadedImage" class="form-label"></label>
+                                    <input asp-for="UploadedImage" class="form-control" type="file" accept="image/*" />
+                                    <span asp-validation-for="UploadedImage" class="text-danger"></span>
+                                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                                    {
+                                        <div class="mt-2">
+                                            <img src="@Model.ImagePath" alt="@Model.Title" class="img-thumbnail" style="max-height: 100px;" />
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="PdfLink" class="form-label"></label>
+                                    <input asp-for="PdfLink" class="form-control" placeholder="https://..." />
+                                    <span asp-validation-for="PdfLink" class="text-danger"></span>
+                                    <small class="form-text text-muted">Agar fayl yuklanmasa, tashqi havolani kiriting</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Orqaga
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-2"></i>Saqlash
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/edit-book.js" asp-append-version="true"></script>
+    <script>
+        // Image preview
+        document.getElementById('UploadedImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.className = 'img-thumbnail mt-2';
+                    preview.style.maxHeight = '200px';
+                    
+                    const container = e.target.parentElement;
+                    const existingPreview = container.querySelector('img');
+                    if (existingPreview) {
+                        container.removeChild(existingPreview);
+                    }
+                    container.appendChild(preview);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+} 

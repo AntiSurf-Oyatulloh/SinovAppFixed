@@ -1,0 +1,145 @@
+@model SinovApp.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Mening profilim";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Mening profilim</h2>
+
+    @if (Model != null)
+    {
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Foydalanuvchi ma'lumotlari</h5>
+                <p><strong>Foydalanuvchi nomi (Username):</strong> @Model.UserName</p>
+                <p><strong>To'liq ism:</strong> @Model.FullName</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                @* Ro'yxatdan o'tgan sanasi (Agar ApplicationUser modelida mavjud bo'lsa) *@
+                @* <p><strong>Ro'yxatdan o'tgan sana:</strong> @Model.CreatedAt.ToShortDateString()</p> *@
+                @* Profil rasmi (Agar ApplicationUser modelida 'ImagePath' kabi property bo'lsa) *@
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="@Model.ImagePath" alt="Profil rasmi" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                }
+                else
+                {
+                    @* Default rasm agar profil rasmi bo'lmasa *@
+                    <img src="/images/default-profile.png" alt="Default Profil Rasmi" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                }
+
+                <h6 class="mt-3">Men haqimda:</h6>
+                <p>@(string.IsNullOrEmpty(Model.Bio) ? "Bio hali qo'shilmagan." : Model.Bio)</p>
+            </div>
+        </div>
+
+        @* Uncomment the following section if activity statistics are implemented *@
+        @* 
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Faoliyat Statistikasi</h5>
+                <p><strong>Yuklab olingan kitoblar:</strong> [Son]</p>
+                <p><strong>Yaxshi ko'rgan kitoblar:</strong> [Son]</p>
+                <p><strong>Ko'rilgan kitoblar:</strong> [Son]</p>
+            </div>
+        </div>
+        *@
+
+        @* Uncomment the following section if LikedBooks/FavoriteBooks are implemented *@
+        @*
+        <h5 class="mt-4">Yaxshi ko'rgan kitoblar</h5>
+        @if (Model.FavoriteBooks != null && Model.FavoriteBooks.Any())
+        {
+            <div class="row mt-3">
+                @foreach (var favorite in Model.FavoriteBooks)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="@favorite.Book.CoverImageUrl" class="card-img-top" alt="@favorite.Book.Title" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">@favorite.Book.Title</h5>
+                                <p class="card-text"><strong>Muallif:</strong> @favorite.Book.Author</p>
+                                <a href="@favorite.Book.FileUrl" class="btn btn-primary">Yuklab olish</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">Siz hali hech qanday kitobni yaxshi ko'rmagansiz.</div>
+        }
+        *@
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Yaxshi ko'rgan kitoblar</h5>
+                @if (Model.LikedBooks != null && Model.LikedBooks.Any())
+                {
+                    <div class="row">
+                        @foreach (var likedBook in Model.LikedBooks.OrderByDescending(l => l.LikedAt))
+                        {
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <img src="@(string.IsNullOrEmpty(likedBook.Book.ImagePath) ? "/images/default-book.png" : likedBook.Book.ImagePath)" 
+                                         class="card-img-top" alt="@likedBook.Book.Title" style="height: 200px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@likedBook.Book.Title</h5>
+                                        <p class="card-text"><strong>Muallif:</strong> @likedBook.Book.Author</p>
+                                        <p class="card-text"><strong>Kategoriya:</strong> @likedBook.Book.Category</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <a href="@Url.Action("Download", "Books", new { id = likedBook.Book.Id })" class="btn btn-primary">
+                                                    <i class="fas fa-download"></i> Yuklab olish
+                                                </a>
+                                                <a href="@Url.Action("Preview", "Books", new { id = likedBook.Book.Id })" class="btn btn-info" data-id="@likedBook.Book.Id">
+                                                    <i class="fas fa-eye"></i> Ko'rish
+                                                </a>
+                                            </div>
+                                            <button class="btn btn-danger like-button" data-book-id="@likedBook.Book.Id">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">Siz hali hech qanday kitobni yaxshi ko'rmagansiz.</div>
+                }
+            </div>
+        </div>
+
+        @* Profilni tahrirlash linki (Agar Edit actioni mavjud bo'lsa) *@
+        <a href="/Profile/Edit" class="btn btn-primary mt-4">Profilni tahrirlash</a>
+    }
+    else
+    {
+        <div class="alert alert-danger">Foydalanuvchi ma'lumotlari topilmadi.</div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.like-button').click(function() {
+                var button = $(this);
+                var bookId = button.data('book-id');
+                
+                $.post('/Books/ToggleLike/' + bookId, function(response) {
+                    if (response.liked) {
+                        button.removeClass('btn-outline-danger').addClass('btn-danger');
+                    } else {
+                        button.removeClass('btn-danger').addClass('btn-outline-danger');
+                        // Remove the book card from the liked books section
+                        button.closest('.col-md-4').fadeOut();
+                    }
+                });
+            });
+        });
+    </script>
+}

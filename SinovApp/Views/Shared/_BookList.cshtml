@@ -1,0 +1,20 @@
+@model IEnumerable<SinovApp.Models.Book>
+
+@if (Model != null && Model.Any())
+{
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var book in Model)
+    {
+        <div class="col">
+            @await Html.PartialAsync("_BookCard", book)
+        </div>
+    }
+</div>
+}
+else
+{
+    <div class="alert alert-info text-center">
+        <i class="bi bi-info-circle me-2"></i>
+        Hech qanday kitob topilmadi
+    </div>
+} 

@@ -1,0 +1,64 @@
+@model List<SinovApp.Models.Book>
+@using System.IO
+
+@{
+    ViewData["Title"] = "Ilmiy adabiyotlar";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🔬 Ilmiy adabiyotlar</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Hozircha ilmiy adabiyotlar mavjud emas.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nomi</th>
+                        <th>Muallif</th>
+                        <th>Kategoriya</th>
+                        <th>Amallar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Author</td>
+                            <td>@book.Category</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(book.FilePath))
+                                {
+                                    <a href="@book.FilePath" class="btn btn-primary btn-sm" target="_blank">
+                                        <i class="fas fa-book-open"></i> O'qish
+                                    </a>
+                                    
+                                    @* Kitobni ko'rish uchun modalni ochuvchi tugma *@
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#previewModal" data-id="@book.Id">
+                                        <i class="bi bi-eye"></i> Ko'rish
+                                    </button>
+
+                                    <a href="@Url.Action("Download", "Books", new { fileName = book.FilePath.Substring(book.FilePath.LastIndexOf('/') + 1) })" 
+                                       class="btn btn-success btn-sm">
+                                        <i class="fas fa-download"></i> Yuklash
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+}

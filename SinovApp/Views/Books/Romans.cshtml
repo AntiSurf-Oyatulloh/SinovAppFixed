@@ -1,0 +1,193 @@
+@model List<SinovApp.Models.Book>
+@using System.IO
+
+@{
+    ViewData["Title"] = "Romanlar";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📚 Romanlar</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Hozircha romanlar mavjud emas.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nomi</th>
+                        <th>Muallif</th>
+                        <th>Kategoriya</th>
+                        <th>Amallar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Author</td>
+                            <td>@book.Category</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(book.FilePath))
+                                {
+                                    <a href="@book.FilePath" class="btn btn-primary btn-sm" target="_blank">
+                                        <i class="fas fa-book-open"></i> O'qish
+                                    </a>
+                                    
+                                    @* Kitobni ko'rish uchun modalni ochuvchi tugma *@
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#previewModal" data-id="@book.Id">
+                                        <i class="bi bi-eye"></i> Ko'rish
+                                    </button>
+
+                                    <a href="@Url.Action("Download", "Books", new { fileName = book.FilePath.Substring(book.FilePath.LastIndexOf('/') + 1) })" 
+                                       class="btn btn-success btn-sm">
+                                        <i class="fas fa-download"></i> Yuklash
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+}
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        // Ko'rish modali ochilganda ishlaydigan funksiya
+        var previewModal = document.getElementById('previewModal');
+        if (previewModal) {
+            previewModal.addEventListener('shown.bs.modal', function (event) {
+                // Modalni ochgan tugmani topish
+                var button = event.relatedTarget;
+                // Kitob ID'sini data-id atributidan olish
+                var bookId = button.getAttribute('data-id');
+
+                // Modal ichidagi iframe, xato va yuklanish elementlarini topish
+                var modalIframe = previewModal.querySelector('#bookPreviewIframe');
+                var modalError = previewModal.querySelector('#previewError');
+                var modalLoading = previewModal.querySelector('#previewLoading');
+
+                // Elementlarni boshlang'ich holatga keltirish
+                if (modalIframe) {
+                    modalIframe.src = ''; // Oldingi kontentni tozalash
+                    modalIframe.style.display = 'none'; // Yuklanayotganda yashirish
+                }
+                if (modalError) {
+                    modalError.style.display = 'none'; // Xato xabarini yashirish
+                }
+                if (modalLoading) {
+                    modalLoading.style.display = 'block'; // Yuklanish belgisini ko'rsatish
+                }
+
+                if (bookId) {
+                    // /Books/Preview endpointiga AJAX so'rov yuborish
+                    fetch('/Books/Preview/' + bookId)
+                        .then(response => {
+                            if (!response.ok) {
+                                // Agar javob 400-499 oralig'ida bo'lsa (klient xatosi) xabarni ko'rsatamiz
+                                if (response.status >= 400 && response.status < 500) {
+                                     return response.text().then(text => { throw new Error(text || 'Kitobni yuklashda xato yuz berdi.'); });
+                                } else {
+                                     throw new Error('Kitobni yuklashda xato yuz berdi.');
+                                }
+                            }
+
+                             // Content-Type ni tekshirish
+                            var contentType = response.headers.get('content-type');
+                            if (contentType && contentType.includes('text/plain')) {
+                                // Agar matn bo'lsa (tashqi havola)
+                                return response.text();
+                            } else {
+                                // Boshqa turlar uchun (fayl baytlari)
+                                return response.blob();
+                            }
+                        })
+                        .then(content => {
+                            if (modalIframe) {
+                                if (typeof content === 'string') {
+                                     // Agar matn bo'lsa, URL deb qabul qilamiz
+                                    modalIframe.src = content;
+                                } else if (content instanceof Blob) {
+                                     // Agar blob bo'lsa, Object URL yaratamiz
+                                    var blobUrl = URL.createObjectURL(content);
+                                    modalIframe.src = blobUrl;
+
+                                    // Modal yopilganda Object URL'ni tozalash
+                                    previewModal.addEventListener('hidden.bs.modal', function handler() {
+                                        URL.revokeObjectURL(blobUrl);
+                                        previewModal.removeEventListener('hidden.bs.modal', handler);
+                                    });
+                                }
+
+                                modalIframe.style.display = 'block'; // Ko'rsatish
+                            }
+                            if (modalLoading) {
+                                modalLoading.style.display = 'none'; // Yuklanish belgisini yashirish
+                            }
+                             if (modalError) {
+                                modalError.style.display = 'none'; // Xato xabarini yashirish
+                             }
+                        })
+                        .catch(error => {
+                            console.error('Preview error:', error);
+                            if (modalLoading) {
+                                modalLoading.style.display = 'none'; // Yuklanish belgisini yashirish
+                            }
+                            if (modalError) {
+                                modalError.innerText = 'Xatolik: Kitobni yuklab bo'lmadi. ' + error.message;
+                                modalError.style.display = 'block'; // Xato xabarini ko'rsatish
+                            }
+                             if (modalIframe) {
+                                modalIframe.style.display = 'none';
+                             }
+                        });
+                } else {
+                    console.error('Kitob ID topilmadi.');
+                     if (modalLoading) {
+                        modalLoading.style.display = 'none';
+                     }
+                     if (modalError) {
+                        modalError.innerText = 'Xatolik: Kitob ID topilmadi.';
+                         modalError.style.display = 'block';
+                    }
+                     if (modalIframe) {
+                         modalIframe.style.display = 'none';
+                     }
+                }
+            });
+
+             // Modal yopilganda iframe src ni tozalash va xato/yuklanish xabarlarini yashirish
+             // Object URLni tozalash yuqoridagi event listener ichida amalga oshiriladi
+            previewModal.addEventListener('hidden.bs.modal', function () {
+                var modalIframe = previewModal.querySelector('#bookPreviewIframe');
+                var modalError = previewModal.querySelector('#previewError');
+                var modalLoading = previewModal.querySelector('#previewLoading');
+
+                 if (modalIframe) {
+                    modalIframe.src = '';
+                 }
+                 if (modalError) {
+                    modalError.style.display = 'none';
+                 }
+                 if (modalLoading) {
+                    modalLoading.style.display = 'none';
+                 }
+            });
+
+        }
+    </script>
+}

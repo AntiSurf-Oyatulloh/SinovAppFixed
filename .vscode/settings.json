@@ -1,0 +1,12 @@
+{
+    "mssql.connections": [
+        {
+            "server": "localhost",
+            "database": "master",
+            "user": "sa",
+            "password": "",
+            "authenticationType": "SqlLogin",
+            "profileName": "Local SQL"
+        }
+    ]
+}

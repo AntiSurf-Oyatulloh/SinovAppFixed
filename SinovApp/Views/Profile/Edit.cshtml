@@ -1,0 +1,68 @@
+@model SinovApp.Models.ApplicationUser
+@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Profilni tahrirlash";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Profilni tahrirlash</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @* Model binding uchun kerak (Id yashirin maydonda yuboriladi) *@
+                <input type="hidden" asp-for="Id" />
+
+                @* Profil rasmi (mavjud rasmni ko'rsatish va yangisini yuklash imkoniyati) *@
+                <div class="mb-3">
+                    <label for="uploadedImage" class="form-label">Profil rasmi:</label>
+                    <div class="d-flex align-items-center">
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                        {
+                            <img src="@Model.ImagePath" alt="Profil rasmi" class="img-thumbnail me-3" style="width: 100px; height: 100px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="/images/default-profile.png" alt="Default Profil Rasmi" class="img-thumbnail me-3" style="width: 100px; height: 100px; object-fit: cover;">
+                        }
+                        <input type="file" id="uploadedImage" name="uploadedImage" class="form-control-file">
+                    </div>
+                    <span asp-validation-for="ImagePath" class="text-danger"></span> @* ImagePath uchun validatsiya xabari *@
+                    <span class="text-danger">@ViewData["uploadedImageError"]</span> @* Controllerdan kelgan rasm yuklash xatosi *@
+                </div>
+
+                @* To'liq ism maydoni *@
+                <div class="mb-3">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                @* Bio maydoni *@
+                <div class="mb-3">
+                    <label asp-for="Bio" class="form-label"></label>
+                    <textarea asp-for="Bio" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+
+                @* E-mail va Username ko'rsatish (tahrirlash uchun emas) *@
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" readonly /> @* Email tahrirlanmaydi (Identity orqali alohida qilinadi) *@
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <a asp-action="Index" class="btn btn-secondary">Bekor qilish</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

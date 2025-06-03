@@ -1,0 +1,118 @@
+@model SinovApp.Models.Book
+
+@{
+    ViewData["Title"] = "Yangi kitob qo'shish";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Yangi kitob qo'shish</h2>
+
+                    <form asp-action="AddBook" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Title" class="form-label">Kitob nomi</label>
+                                    <input asp-for="Title" class="form-control" placeholder="Kitob nomini kiriting" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Author" class="form-label">Muallif</label>
+                                    <input asp-for="Author" class="form-control" placeholder="Muallif nomini kiriting" />
+                                    <span asp-validation-for="Author" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Category" class="form-label">Kategoriya</label>
+                                    <select asp-for="Category" class="form-select">
+                                        <option value="">Kategoriyani tanlang</option>
+                                        <option value="Romanlar">Romanlar</option>
+                                        <option value="Ilmiy adabiyotlar">Ilmiy adabiyotlar</option>
+                                        <option value="Darsliklar">Darsliklar</option>
+                                    </select>
+                                    <span asp-validation-for="Category" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="UploadedFile" class="form-label">Kitob fayli</label>
+                                    <input asp-for="UploadedFile" type="file" class="form-control" />
+                                    <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                                    <small class="text-muted">Agar xatolik bo'lsa, faylni qayta tanlang.</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="UploadedImage" class="form-label">Kitob rasmi</label>
+                                    <input asp-for="UploadedImage" type="file" class="form-control" />
+                                    <span asp-validation-for="UploadedImage" class="text-danger"></span>
+                                    <small class="text-muted">Agar xatolik bo'lsa, rasmni qayta tanlang.</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="PdfLink" class="form-label">Tashqi havola (ixtiyoriy)</label>
+                                    <input asp-for="PdfLink" class="form-control" placeholder="https://..." />
+                                    <span asp-validation-for="PdfLink" class="text-danger"></span>
+                                    <small class="form-text text-muted">Agar fayl yuklanmasa, tashqi havolani kiriting.
+                                        Fayl yuklansa, tashqi havola avtomatik yaratiladi.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Tavsif</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Kitob haqida qisqacha ma'lumot kiriting"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Orqaga
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-plus-lg me-2"></i>Qo'shish
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Rasm oldindan ko'rish
+        document.getElementById('UploadedImage').addEventListener('change', function (e)
+        {
+            const file = e.target.files[0];
+            if (file)
+            {
+                const reader = new FileReader();
+                reader.onload = function (e)
+                {
+                    const preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.className = 'img-thumbnail mt-2';
+                    preview.style.maxHeight = '200px';
+
+                    const container = e.target.parentElement;
+                    const existingPreview = container.querySelector('img');
+                    if (existingPreview)
+                    {
+                        container.removeChild(existingPreview);
+                    }
+                    container.appendChild(preview);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

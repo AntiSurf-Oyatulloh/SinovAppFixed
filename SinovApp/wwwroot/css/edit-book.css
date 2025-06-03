@@ -1,0 +1,187 @@
+/* Edit Book Form Styles */
+.edit-book-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.edit-book-form .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+}
+
+.edit-book-form .card:hover {
+    transform: translateY(-5px);
+}
+
+.edit-book-form .card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.edit-book-form .card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    border-radius: 3px;
+}
+
+/* Form Controls */
+.edit-book-form .form-label {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 0.5rem;
+}
+
+.edit-book-form .form-control,
+.edit-book-form .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.edit-book-form .form-control:focus,
+.edit-book-form .form-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+}
+
+.edit-book-form .form-control::placeholder {
+    color: #95a5a6;
+}
+
+/* File Upload Styling */
+.edit-book-form .file-upload-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.edit-book-form .file-upload-wrapper .form-control {
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+}
+
+.edit-book-form .file-upload-wrapper .form-control::-webkit-file-upload-button {
+    background: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.edit-book-form .file-upload-wrapper .form-control::-webkit-file-upload-button:hover {
+    background: #2980b9;
+}
+
+/* Image Preview */
+.edit-book-form .image-preview {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-book-form .image-preview img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Buttons */
+.edit-book-form .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.edit-book-form .btn-primary {
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    border: none;
+}
+
+.edit-book-form .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.edit-book-form .btn-secondary {
+    background: #95a5a6;
+    border: none;
+}
+
+.edit-book-form .btn-secondary:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* Validation Styles */
+.edit-book-form .is-invalid {
+    border-color: #e74c3c !important;
+}
+
+.edit-book-form .invalid-feedback {
+    font-size: 0.875rem;
+    color: #e74c3c;
+    margin-top: 0.25rem;
+}
+
+/* Progress Indicator */
+.edit-book-form .progress-indicator {
+    background: rgba(52, 152, 219, 0.1);
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.edit-book-form .progress-indicator .spinner-border {
+    color: #3498db;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .edit-book-form .card {
+        margin: 0 1rem;
+    }
+
+    .edit-book-form .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .edit-book-form .d-flex {
+        flex-direction: column;
+    }
+}
+
+/* Custom Scrollbar */
+.edit-book-form textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.edit-book-form textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.edit-book-form textarea::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.edit-book-form textarea::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}

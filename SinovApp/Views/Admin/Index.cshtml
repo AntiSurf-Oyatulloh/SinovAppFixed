@@ -1,0 +1,117 @@
+@model IEnumerable<SinovApp.Models.Book>
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Kitoblar ro'yxati</h1>
+        <a href="@Url.Action("AddBook")" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>Yangi kitob
+        </a>
+    </div>
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @ViewBag.Success
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @ViewBag.Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                    <th>Rasm</th>
+                    <th>Nomi</th>
+                    <th>Muallif</th>
+                    <th>Kategoriya</th>
+                    <th>Yaratilgan sana</th>
+                    <th>Yuklanganlar</th>
+                    <th>Ko'rilganlar</th>
+                    <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(book.ImagePath))
+                            {
+                                <img src="@book.ImagePath" alt="@book.Title" class="img-thumbnail" style="width: 50px; height: 70px; object-fit: cover;" />
+                            }
+                            else
+                            {
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="width: 50px; height: 70px;">
+                                    <i class="bi bi-book text-muted"></i>
+                                </div>
+                            }
+                        </td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Category</td>
+                        <td>@book.CreatedAt.ToString("dd.MM.yyyy")</td>
+                        <td>@book.DownloadCount</td>
+                        <td>@book.ViewCount</td>
+                    <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("EditBook", new { id = book.Id })" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button type="button" class="btn btn-sm btn-outline-danger" 
+                                        onclick="confirmDelete(@book.Id, '@book.Title')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kitobni o'chirish</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Rostdan ham <strong id="bookTitle"></strong> kitobini o'chirmoqchimisiz?</p>
+                <p class="text-danger">Bu amalni qaytarib bo'lmaydi!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">O'chirish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(id, title) {
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            document.getElementById('bookTitle').textContent = title;
+            document.getElementById('deleteForm').action = '@Url.Action("DeleteBook")/' + id;
+            modal.show();
+        }
+    </script>
+}
