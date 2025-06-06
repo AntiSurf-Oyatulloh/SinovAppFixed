@@ -119,7 +119,16 @@ namespace SinovApp
             }
 
             const string adminEmail = "oyatullohmuxtorov5@gmail.com";
-            const string adminPassword = "Oyatulloh5523.08@sharq";
+            // const string adminPassword = "Oyatulloh5523.08@sharq"; // Hardcoded parol o'chirildi
+            
+            // Admin parolini Environment Variable'dan olish
+            var adminPassword = builder.Configuration["AdminPassword"];
+            if (string.IsNullOrEmpty(adminPassword))
+            {
+                // Agar environment variable topilmasa, xatolik chiqarish yoki default qiymat berish
+                // Production uchun environment variable qo'yish talab qilinadi
+                throw new Exception("Admin paroli Environment Variable sifatida sozlangan bo'lishi kerak (AdminPassword). Yoki developmentda appsettings.json dan oling.");
+            }
 
             var user = await userManager.FindByEmailAsync(adminEmail);
             if (user == null)
