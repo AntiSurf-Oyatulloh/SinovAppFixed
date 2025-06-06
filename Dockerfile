@@ -25,5 +25,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# **Noto‘g‘ri yozilgan ENTRYPOINT to‘g‘rilandi**
-ENTRYPOINT ["dotnet", "SinovApp.dll"]
+# **Noto'g'ri yozilgan ENTRYPOINT to'g'rilandi**
+ENTRYPOINT ["/bin/bash", "-c", "dotnet ef database update && dotnet SinovApp.dll"]

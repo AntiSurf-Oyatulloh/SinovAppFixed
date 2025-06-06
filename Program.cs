@@ -89,6 +89,13 @@ namespace SinovApp
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            // Database migration'larni avtomatik qo'llash
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                db.Database.Migrate();
+            }
+
             // Rollar va admin yaratish
             await SeedRolesAndAdminAsync(app);
 
