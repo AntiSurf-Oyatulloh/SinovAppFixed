@@ -1,0 +1,41 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+
+# User-specific files
+appsettings.json
+appsettings.*.json
+!appsettings.Example.json
+.env
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Sensitive files
+**/bin/Debug/net9.0/appsettings.json
+**/bin/Release/net9.0/appsettings.json
+.DS_Store

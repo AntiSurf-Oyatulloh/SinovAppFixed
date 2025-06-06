@@ -8,5 +8,5 @@
             "authenticationType": "SqlLogin",
             "profileName": "Local SQL"
         }
-    ]
-}
+        ]
+    }

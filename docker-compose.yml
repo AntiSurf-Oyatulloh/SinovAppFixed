@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_container
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:1433"
+    networks:
+      - sql_network
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+    platform: linux/amd64 # ARM64 platformasi
+
+networks:
+  sql_network:
+    driver: bridge
+
+volumes:
+  sql_data:
