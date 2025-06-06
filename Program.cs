@@ -96,8 +96,8 @@ namespace SinovApp
                 db.Database.Migrate();
             }
 
-            // Rollar va admin yaratish
-            await SeedRolesAndAdminAsync(app);
+            // Rollar va admin yaratish (vaqtinchalik kommentariyaga olindi)
+            // await SeedRolesAndAdminAsync(app);
 
             await app.RunAsync();
         }
